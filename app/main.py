@@ -101,10 +101,10 @@ def move():
     }
     
 def check_move(ourx, oury, data):
-    #if ourx >= board_width or ourx < 0:
-    #    return 0
-    #if oury >= board_height or oury < 0:
-    #    return 0
+    if ourx >= board_width or ourx < 0:
+        return 0
+    if oury >= board_height or oury < 0:
+        return 0
     if data["you"]["body"]["data"][1]["x"] == ourx and data["you"]["body"]["data"][1]["y"] == oury:
         return 0
     #for s in data["snakes"]["data"]:
