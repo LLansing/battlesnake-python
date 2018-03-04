@@ -57,9 +57,9 @@ def move():
     x_diff = hx - tx
     y_diff = hy - ty
     
-    if x_diff > 0 and check_move(hx + 1, hy, data):
+    if x_diff > 0 and check_move(hx - 1, hy, data):
             direction = 'left'
-    #elif x_diff < 0 and check_move(hx - 1, hy, data):
+    #elif x_diff < 0 and check_move(hx + 1, hy, data):
     #        direction = 'right'
     #elif y_diff > 0 and check_move(hx, hy - 1, data):
     #        direction = 'up'
