@@ -88,9 +88,9 @@ def move():
     
 def check_move(ourx, oury, data):
     if ourx >= board_width or ourx < 0:
-        return False
+        return 0
     if oury >= board_height or oury < 0:
-        return False
+        return 0
     #for block in data["you"]["body"]["data"]:
     #    if ourx == block["x"] and oury = block["y"]:
     #        return False
@@ -98,7 +98,7 @@ def check_move(ourx, oury, data):
     #    for sb in s["body"]["data"]:
     #        if(sb.x == ourx and sb.y == oury):
     #            return false
-    return True
+    return 1
     
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
