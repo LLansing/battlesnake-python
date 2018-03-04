@@ -79,12 +79,11 @@ def move():
     #    else:
     #        direction = random.choice(directions)
             
-    message = (x_diff, y_diff)
       
     print direction
     return {
         'move': direction,
-        'taunt': message
+        'taunt': "Kachow"
     }
     
 def check_move(ourx, oury, data):
