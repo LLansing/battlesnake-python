@@ -68,16 +68,16 @@ def move():
     else:
         while True:
             direction = random.choice(directions)
-                if direction = 'left':
+                if direction == 'left':
                     if(check_move(hx - 1, hy, data)):
                         break
-                if direction = 'right':
+                if direction == 'right':
                     if(check_move(hx + 1, hy, data)):
                         break
-                if direction = 'up':
+                if direction == 'up':
                     if(check_move(hx, hy - 1, data)):
                         break
-                if direction = 'down':
+                if direction == 'down':
                     if(check_move(hx, hy + 1, data)):
                         break
 
