@@ -91,9 +91,9 @@ def check_move(ourx, oury, data):
         return False
     if oury >= board_height or oury < 0:
         return False
-    for block in data["you"]["body"]["data"]:
-        if ourx == block["x"] and oury = block["y"]:
-            return False
+    #for block in data["you"]["body"]["data"]:
+    #    if ourx == block["x"] and oury = block["y"]:
+    #        return False
     #for s in data["snakes"]["data"]:
     #    for sb in s["body"]["data"]:
     #        if(sb.x == ourx and sb.y == oury):
