@@ -17,7 +17,6 @@ def static(path):
 @bottle.post('/start')
 def start():
 
-    last_move = 'up'
     data = bottle.request.json
     game_id = data.get('game_id')
     board_width = data.get('width')
@@ -101,9 +100,11 @@ def move():
     }
     
 def check_move(ourx, oury, data):
-    if ourx >= board_width or ourx < 0:
-        return 0
-    if oury >= board_height or oury < 0:
+    
+    board_width = data.get('width')
+    board_height = data.get('height')
+    
+    if ourx >= board_width or ourx < 0 or oury >= board_height or oury < 0:
         return 0
     if data["you"]["body"]["data"][1]["x"] == ourx and data["you"]["body"]["data"][1]["y"] == oury:
         return 0
