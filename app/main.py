@@ -63,10 +63,10 @@ def move():
             direction = 'right'
     elif y_diff > 0 and check_move(hx, hy - 1, data):
             direction = 'up'
+    elif y_diff < 0 and check_move(hx, hy + 1, data):
+            direction = 'down'
     else:
         direction = random.choice(directions)
-    #elif y_diff < 0 and check_move(hx, hy + 1, data):
-    #        direction = 'down'
     #else:
     #    if check_move(hx + 1, hy, data):
     #        direction = 'right'
@@ -79,24 +79,27 @@ def move():
     #    else:
     #        direction = random.choice(directions)
             
-
+    message = (x_diff, y_diff)
       
     print direction
     return {
         'move': direction,
-        'taunt': 'Kachow'
+        'taunt': message
     }
     
 def check_move(ourx, oury, data):
     if ourx >= board_width or ourx < 0:
-        return false
+        return False
     if oury >= board_height or oury < 0:
-        return false
+        return False
+    for block in data["you"]["body"]["data"]:
+        if ourx == block["x"] and oury = block["y"]:
+            return False
     #for s in data["snakes"]["data"]:
     #    for sb in s["body"]["data"]:
     #        if(sb.x == ourx and sb.y == oury):
     #            return false
-    return true
+    return True
     
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
