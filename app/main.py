@@ -61,10 +61,10 @@ def move():
             direction = 'left'
     elif x_diff < 0 and check_move(hx + 1, hy, data):
             direction = 'right'
+    elif y_diff > 0 and check_move(hx, hy - 1, data):
+            direction = 'up'
     else:
         direction = random.choice(directions)
-    #elif y_diff > 0 and check_move(hx, hy - 1, data):
-    #        direction = 'up'
     #elif y_diff < 0 and check_move(hx, hy + 1, data):
     #        direction = 'down'
     #else:
