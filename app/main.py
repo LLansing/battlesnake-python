@@ -116,9 +116,8 @@ def check_move(ourx, oury, data):
         if seg['x'] == ourx and seg['y'] == oury:
             return 0
     for snek in data["snakes"]["data"]:
-        for bseg in snek["body"]["data"]:
-            if bseg['x'] == ourx and bseg['y'] == oury:
-                return 0  
+        if abs(snek['body']['data'][0]['x'] - ourx) +  abs(snek['body']['data'][0]['y'] - oury) == 1:
+            return 0
     #for seg in data.get("you").get("body").get("data"):
         #if seg.get("x") == ourx and seg.get("y") == oury:
         #    return 0
