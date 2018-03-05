@@ -113,7 +113,8 @@ def check_move(ourx, oury, data):
     #    return 0
     
     for seg in data["you"]["body"]["data"]:
-        pass
+        if seg['x'] == ourx and seg['y'] == oury:
+            return 0
     #for seg in data.get("you").get("body").get("data"):
         #if seg.get("x") == ourx and seg.get("y") == oury:
         #    return 0
