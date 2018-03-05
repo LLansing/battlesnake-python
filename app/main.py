@@ -87,20 +87,20 @@ def set_direction(x_diff, y_diff, hx, hy, data):
     elif y_diff < 0 and check_move(hx, hy + 1, data):
             return 'down'
     else:
-        while 1:
-            rand_dir = random.choice(directions)
-            if rand_dir == 'left':
-                if check_move(hx - 1, hy, data):
-                    return "left"
-            if rand_dir == 'right':
-                if check_move(hx + 1, hy, data):
-                    return "right"
-            if rand_dir == 'up':
-                if check_move(hx, hy - 1, data):
-                    return "up"
-            if rand_dir == 'down':
-                if check_move(hx, hy + 1, data):
-                    return "down"
+        #while 1:
+        return random.choice(directions)
+        #    if rand_dir == 'left':
+        #        if check_move(hx - 1, hy, data):
+        #            return "left"
+        #    if rand_dir == 'right':
+        #        if check_move(hx + 1, hy, data):
+        #            return "right"
+        #    if rand_dir == 'up':
+        #        if check_move(hx, hy - 1, data):
+        #            return "up"
+        #    if rand_dir == 'down':
+        #        if check_move(hx, hy + 1, data):
+        #            return "down"
     
 def check_move(ourx, oury, data):
     
