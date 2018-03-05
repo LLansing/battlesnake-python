@@ -59,18 +59,18 @@ def move():
     ht_x_diff = hx - tx
     ht_y_diff = hy - ty
     
-    #if data.get("you").get("health") < 51:
-    #    for crumb in data.get("food").get("data"):
-    #        xtemp = hx - crumb.get("x")
-    #        ytemp = hy - crumb.get("y")
-    #        temp_tot = abs(xtemp) + abs(ytemp)
-    #        if temp_tot <= c_tot_diff:
-    #            hc_x_diff = xtemp
-    #            hc_y_diff = ytemp
-    #            c_tot_diff = temp_tot
-    #    direction = set_direction(hc_x_diff, hc_y_diff, hx, hy, data)
-    #else:
-    #direction = set_direction(ht_x_diff, ht_y_diff, hx, hy, data)
+    if data.get("you").get("health") < 51:
+        for crumb in data.get("food").get("data"):
+            xtemp = hx - crumb.get("x")
+            ytemp = hy - crumb.get("y")
+            temp_tot = abs(xtemp) + abs(ytemp)
+            if temp_tot <= c_tot_diff:
+                hc_x_diff = xtemp
+                hc_y_diff = ytemp
+                c_tot_diff = temp_tot
+        direction = set_direction(hc_x_diff, hc_y_diff, hx, hy, data)
+    else:
+        direction = set_direction(ht_x_diff, ht_y_diff, hx, hy, data)
       
     print direction
     return {
@@ -90,16 +90,16 @@ def set_direction(x_diff, y_diff, hx, hy, data):
         while 1:
             rand_dir = random.choice(directions)
             if rand_dir == 'left':
-                if(check_move(hx - 1, hy, data)):
+                if check_move(hx - 1, hy, data):
                     return "left"
             if rand_dir == 'right':
-                if(check_move(hx + 1, hy, data)):
+                if check_move(hx + 1, hy, data):
                     return "right"
             if rand_dir == 'up':
-                if(check_move(hx, hy - 1, data)):
+                if check_move(hx, hy - 1, data):
                     return "up"
             if rand_dir == 'down':
-                if(check_move(hx, hy + 1, data)):
+                if check_move(hx, hy + 1, data):
                     return "down"
     
 def check_move(ourx, oury, data):
