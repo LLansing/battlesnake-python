@@ -119,7 +119,7 @@ def check_move(ourx, oury, data):
     #            return 0
     for s in data['snakes']['data']:
         if abs(s['body']['data'][0]['x'] - ourx) +  abs(s['body']['data'][0]['y'] - oury) == 1:
-                return 0
+            return 0
         for sb in s['body']['data']:
             if sb['x'] == ourx and sb['y'] == oury:
                 return 0
