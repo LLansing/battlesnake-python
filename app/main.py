@@ -59,7 +59,7 @@ def move():
     ht_x_diff = hx - tx
     ht_y_diff = hy - ty
     
-    if data.get("you").get("health") < 400:
+    if data.get("you").get("health") < 51:
         for crumb in data.get("food").get("data"):
             xtemp = hx - crumb.get("x")
             ytemp = hy - crumb.get("y")
@@ -103,15 +103,16 @@ def set_direction(x_diff, y_diff, hx, hy, data):
                     return "down"
     
 def check_move(ourx, oury, data):
+    data = bottle.request.json
     
     board_width = data.get('width')
     board_height = data.get('height')
     
     if ourx >= board_width or ourx < 0 or oury >= board_height or oury < 0:
         return 0
-    #for ourbod_seg in data.get("you").get("body").get("data"):
-        #if ourbod_seg.get("x") == ourx and ourbod_seg.get("y") == oury:
-        #    return 0
+    for ourbod_seg in data.get("you").get("body").get("data"):
+        if ourbod_seg.get("x") == ourx and ourbod_seg.get("y") == oury:
+            return 0
     
     #for snek in data.get("snakes").get("data"):
     #    for bod_seg in snek.get("body").get("data"):
