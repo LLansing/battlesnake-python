@@ -6,7 +6,7 @@ import random
 
 @bottle.route('/')
 def static():
-    return "the server is running"
+    return 'the server is running'
 
 
 @bottle.route('/static/<path:path>')
@@ -40,8 +40,8 @@ def start():
 def move():
     data = bottle.request.json
 
-    tail = data["you"]["body"]["data"][-1]
-    head = data["you"]["body"]["data"][0]
+    tail = data['you']['body']['data'][-1]
+    head = data['you']['body']['data'][0]
 
     # TODO: Do things with data
     
@@ -51,18 +51,18 @@ def move():
     hc_y_diff = data.get('height')
     c_tot_diff = hc_x_diff + hc_y_diff
     
-    hx = head["x"]
-    hy = head["y"]
-    tx = tail["x"]
-    ty = tail["y"]
+    hx = head['x']
+    hy = head['y']
+    tx = tail['x']
+    ty = tail['y']
     
     ht_x_diff = hx - tx
     ht_y_diff = hy - ty
     
-    if data.get("you").get("health") < 101:
-        for crumb in data.get("food").get("data"):
-            xtemp = hx - crumb.get("x")
-            ytemp = hy - crumb.get("y")
+    if data.get('you').get('health') < 101:
+        for crumb in data.get('food').get('data'):
+            xtemp = hx - crumb.get('x')
+            ytemp = hy - crumb.get('y')
             temp_tot = abs(xtemp) + abs(ytemp)
             if temp_tot <= c_tot_diff:
                 hc_x_diff = xtemp
@@ -75,7 +75,7 @@ def move():
     print direction
     return {
         'move': direction,
-        'taunt': "Kachow"
+        'taunt': 'Kachow'
     }
 def set_direction(x_diff, y_diff, hx, hy, data):
     if x_diff > 0 and check_move(hx - 1, hy, data):
@@ -87,20 +87,15 @@ def set_direction(x_diff, y_diff, hx, hy, data):
     elif y_diff < 0 and check_move(hx, hy + 1, data):
             return 'down'
     else:
-        while 1:
-            rand_dir = random.choice(directions)
-            if rand_dir == 'left':
-                if check_move(hx - 1, hy, data):
-                    return "left"
-            if rand_dir == 'right':
-                if check_move(hx + 1, hy, data):
-                    return "right"
-            if rand_dir == 'up':
-                if check_move(hx, hy - 1, data):
-                    return "up"
-            if rand_dir == 'down':
-                if check_move(hx, hy + 1, data):
-                    return "down"
+        if check_move(hx - 1, hy, data):
+            return 'left'
+        if check_move(hx + 1, hy, data):
+            return 'right'
+        if check_move(hx, hy - 1, data):
+            return 'up'
+        if check_move(hx, hy + 1, data):
+            return 'down'
+    return 'down'
     
 def check_move(ourx, oury, data):
     
@@ -111,22 +106,22 @@ def check_move(ourx, oury, data):
     #if ourx == ourbody[1].get('x') and oury ==  ourbody[1].get('y'):
     #    return 0
     
-    for seg in data["you"]["body"]["data"]:
+    for seg in data['you']['body']['data']:
         if seg['x'] == ourx and seg['y'] == oury:
             return 0
-    #for snek in data["snakes"]["data"]:
+    #for snek in data['snakes']['data']:
         #if abs(snek['body']['data'][0]['x'] - ourx) +  abs(snek['body']['data'][0]['y'] - oury) == 1:
         #    return 0
-    #for seg in data.get("you").get("body").get("data"):
-        #if seg.get("x") == ourx and seg.get("y") == oury:
+    #for seg in data.get('you').get('body').get('data'):
+        #if seg.get('x') == ourx and seg.get('y') == oury:
         #    return 0
         
-    #for snek in data.get("snakes").get("data"):
-    #    for bod_seg in snek.get("body").get("data"):
-    #        if bod_seg.get("x") == ourx and bod_seg.get("y") == oury:
+    #for snek in data.get('snakes').get('data'):
+    #    for bod_seg in snek.get('body').get('data'):
+    #        if bod_seg.get('x') == ourx and bod_seg.get('y') == oury:
     #            return 0
-    #for s in data["snakes"]["data"]:
-    #    for sb in s["body"]["data"]:
+    #for s in data['snakes']['data']:
+    #    for sb in s['body']['data']:
     #        if(sb.x == ourx and sb.y == oury):
     #            return false
     return 1
