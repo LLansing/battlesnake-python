@@ -113,10 +113,10 @@ def check_move(ourx, oury, data):
     #    if ourbod_seg.get("x") == ourx and ourbod_seg.get("y") == oury:
     #        return 0
     
-    for snek in data.get("snakes").get("data"):
-        for bod_seg in snek.get("body").get("data"):
-            if bod_seg.get("x") == ourx and bod_seg.get("y") == oury:
-                return 0
+    #for snek in data.get("snakes").get("data"):
+    #    for bod_seg in snek.get("body").get("data"):
+    #        if bod_seg.get("x") == ourx and bod_seg.get("y") == oury:
+    #            return 0
     #for s in data["snakes"]["data"]:
     #    for sb in s["body"]["data"]:
     #        if(sb.x == ourx and sb.y == oury):
