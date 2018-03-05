@@ -121,6 +121,8 @@ def check_move(ourx, oury, data):
         for sb in s['body']['data']:
             if sb['x'] == ourx and sb['y'] == oury:
                 return 0
+            if abs(snek['body']['data'][0]['x'] - ourx) +  abs(snek['body']['data'][0]['y'] - oury) == 1:
+                return 0
     return 1
     
 # Expose WSGI app (so gunicorn can find it)
