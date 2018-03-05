@@ -47,7 +47,7 @@ def move():
     
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
-    hc_x_diff = data.get("width")
+    hc_x_diff = data.get('width')
     hc_y_diff = data.get('height')
     c_tot_diff = hc_x_diff + hc_y_diff
     
@@ -87,20 +87,20 @@ def set_direction(x_diff, y_diff, hx, hy, data):
     elif y_diff < 0 and check_move(hx, hy + 1, data):
             return 'down'
     else:
-        #while 1:
-        return random.choice(directions)
-        #    if rand_dir == 'left':
-        #        if check_move(hx - 1, hy, data):
-        #            return "left"
-        #    if rand_dir == 'right':
-        #        if check_move(hx + 1, hy, data):
-        #            return "right"
-        #    if rand_dir == 'up':
-        #        if check_move(hx, hy - 1, data):
-        #            return "up"
-        #    if rand_dir == 'down':
-        #        if check_move(hx, hy + 1, data):
-        #            return "down"
+        while 1:
+            rand_dir = random.choice(directions)
+            if rand_dir == 'left':
+                if check_move(hx - 1, hy, data):
+                    return "left"
+            if rand_dir == 'right':
+                if check_move(hx + 1, hy, data):
+                    return "right"
+            if rand_dir == 'up':
+                if check_move(hx, hy - 1, data):
+                    return "up"
+            if rand_dir == 'down':
+                if check_move(hx, hy + 1, data):
+                    return "down"
     
 def check_move(ourx, oury, data):
     
@@ -109,9 +109,9 @@ def check_move(ourx, oury, data):
     
     if ourx >= board_width or ourx < 0 or oury >= board_height or oury < 0:
         return 0
-    for ourbod_seg in data.get("you").get("body").get("data"):
-        if ourbod_seg.get("x") == ourx and ourbod_seg.get("y") == oury:
-            return 0
+    #for ourbod_seg in data.get("you").get("body").get("data"):
+    #    if ourbod_seg.get("x") == ourx and ourbod_seg.get("y") == oury:
+    #        return 0
     
     for snek in data.get("snakes").get("data"):
         for bod_seg in snek.get("body").get("data"):
