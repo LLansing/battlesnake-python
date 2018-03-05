@@ -111,7 +111,7 @@ def check_move(ourx, oury, data):
     if ourx >= board_width or ourx < 0 or oury >= board_height or oury < 0:
         return 0
     for ourbod_seg in ourbody:
-        return 0
+        print ourbod_seg
     
     #for snek in data.get("snakes").get("data"):
     #    for bod_seg in snek.get("body").get("data"):
