@@ -118,8 +118,10 @@ def check_move(ourx, oury, data):
     #        if bod_seg.get('x') == ourx and bod_seg.get('y') == oury:
     #            return 0
     for s in data['snakes']['data']:
-        if (abs(s['body']['data'][0].get('x') - ourx) + abs(s['body']['data'][0].get('y') - oury)) == 1:
-            pass
+        s_x = s['body']['data'][0].get('x')
+        s_y = s['body']['data'][0].get('y')
+        if abs((ourx - s_x) +  (oury - s_y)) == 1:
+            return 0
         for sb in s['body']['data']:
             if sb['x'] == ourx and sb['y'] == oury:
                 return 0
