@@ -59,7 +59,7 @@ def move():
     ht_x_diff = hx - tx
     ht_y_diff = hy - ty
     
-    if data.get("you").get("health") < 101:
+    if data.get("you").get("health") < 61:
         for crumb in data.get("food").get("data"):
             xtemp = hx - crumb.get("x")
             ytemp = hy - crumb.get("y")
@@ -115,6 +115,10 @@ def check_move(ourx, oury, data):
     for seg in data["you"]["body"]["data"]:
         if seg['x'] == ourx and seg['y'] == oury:
             return 0
+    for snek in data["snakes"]["data"]:
+        for bseg in snek["body"]["data"]:
+            if bseg['x'] == ourx and bseg['y'] == oury:
+                return 0  
     #for seg in data.get("you").get("body").get("data"):
         #if seg.get("x") == ourx and seg.get("y") == oury:
         #    return 0
