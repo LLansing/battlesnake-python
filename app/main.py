@@ -70,7 +70,7 @@ def move():
     #            c_tot_diff = temp_tot
     #    direction = set_direction(hc_x_diff, hc_y_diff, hx, hy, data)
     #else:
-    direction = set_direction(ht_x_diff, ht_y_diff, hx, hy, data)
+    #direction = set_direction(ht_x_diff, ht_y_diff, hx, hy, data)
       
     print direction
     return {
