@@ -107,7 +107,7 @@ def check_move(ourx, oury, data):
     
     board_width = data.get('width')
     board_height = data.get('height')
-    ourbody = data.get("you").get("body").get("data")
+    ourbody = data.get("you").get("body").get("data").get("shrek")
     if ourx >= board_width or ourx < 0 or oury >= board_height or oury < 0:
         return 0
     #for ourbod_seg in ourbody:
