@@ -107,7 +107,7 @@ def check_move(ourx, oury, data):
     #    return 0
     
     for seg in data['you']['body']['data']:
-        if seg['x'] == ourx and seg['y'] == oury and seg == data['you']['body']['data'][-1]:
+        if seg['x'] == ourx and seg['y'] == oury and seg != data['you']['body']['data'][-1]:
             return 0
     #for snek in data['snakes']['data']:
         #if abs(snek['body']['data'][0]['x'] - ourx) +  abs(snek['body']['data'][0]['y'] - oury) == 1:
