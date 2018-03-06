@@ -30,7 +30,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#FFFFFF',
+        'color': '#663751',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url
     }
@@ -120,8 +120,8 @@ def check_move(ourx, oury, data):
     for s in data['snakes']['data']:
         s_x = s['body']['data'][0].get('x')
         s_y = s['body']['data'][0].get('y')
-        #if abs((ourx - s_x)) + abs((oury - s_y)) == 1:
-        #    return 0
+        if abs((ourx - s_x)) + abs((oury - s_y)) == 2:
+            return 0
         for sb in s['body']['data']:
             if sb['x'] == ourx and sb['y'] == oury:
                 return 0
