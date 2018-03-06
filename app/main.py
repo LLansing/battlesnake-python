@@ -30,7 +30,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#7F300E',
+        'color': '#FF002B',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url
     }
@@ -106,8 +106,8 @@ def check_move(ourx, oury, data):
     #if ourx == ourbody[1].get('x') and oury ==  ourbody[1].get('y'):
     #    return 0
     
-    for seg in data['you']['body']['data'][:-1]:
-        if seg['x'] == ourx and seg['y'] == oury:
+    for seg in data['you']['body']['data']:
+        if seg['x'] == ourx and seg['y'] == oury and seg == data['you']['body']['data'][-1]:
             return 0
     #for snek in data['snakes']['data']:
         #if abs(snek['body']['data'][0]['x'] - ourx) +  abs(snek['body']['data'][0]['y'] - oury) == 1:
