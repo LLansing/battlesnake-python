@@ -59,7 +59,7 @@ def move():
     ht_x_diff = hx - tx
     ht_y_diff = hy - ty
     
-    if data.get('you').get('health') < 61 :
+    if data.get('you').get('health') < 61 or (len(data.get('snakes').get('data')) == 1 and data['snakes']['data'][0]['length'] > data['you']['length']):
         for crumb in data.get('food').get('data'):
             xtemp = hx - crumb.get('x')
             ytemp = hy - crumb.get('y')
