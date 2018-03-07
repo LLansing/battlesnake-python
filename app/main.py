@@ -59,7 +59,7 @@ def move():
     ht_x_diff = hx - tx
     ht_y_diff = hy - ty
     
-    if data.get('you').get('health') < 61 or (len(data.get('snakes').get('data')) == 1 and data['snakes']['data'][0]['length'] >= data['you']['length']):
+    if data.get('you').get('health') < 61 or (len(data.get('snakes').get('data')) == 2 and data['snakes']['data'][0]['length'] >= data['you']['length']):
         for crumb in data.get('food').get('data'):
             xtemp = hx - crumb.get('x')
             ytemp = hy - crumb.get('y')
@@ -108,7 +108,7 @@ def check_move(ourx, oury, data):
         return 0
     #if ourx == ourbody[1].get('x') and oury ==  ourbody[1].get('y'):
     #    return 0
-    if ourx != tx and oury != ty:
+    if ourx != tx or oury != ty:
         for seg in data['you']['body']['data']:
             if seg['x'] == ourx and seg['y'] == oury:
                 return 0
@@ -120,7 +120,7 @@ def check_move(ourx, oury, data):
     #    for bod_seg in snek.get('body').get('data'):
     #        if bod_seg.get('x') == ourx and bod_seg.get('y') == oury:
     #            return 0
-    for s in data['snakes']['data']:
+    for s in data['snakes']['data'] if s['id'] != data['you']['id']:
         s_x = s['body']['data'][0].get('x')
         s_y = s['body']['data'][0].get('y')
         if abs((ourx - s_x)) + abs((oury - s_y)) == 2:  #WTF doesn't this work when == 1?
