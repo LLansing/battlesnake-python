@@ -30,7 +30,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#C9BABC',
+        'color': '#F00F00',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url
     }
