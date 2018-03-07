@@ -30,7 +30,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#F00F00',
+        'color': '#00FCAB',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url
     }
@@ -108,10 +108,9 @@ def check_move(ourx, oury, data):
         return 0
     #if ourx == ourbody[1].get('x') and oury ==  ourbody[1].get('y'):
     #    return 0
-    if ourx != tx or oury != ty:
-        for seg in data['you']['body']['data']:
-            if seg['x'] == ourx and seg['y'] == oury:
-                return 0
+    for seg in data['you']['body']['data'][:-1]:
+        if seg['x'] == ourx and seg['y'] == oury:
+            return 0
     #for snek in data['snakes']['data']:
         #if abs(snek['body']['data'][0]['x'] - ourx) +  abs(snek['body']['data'][0]['y'] - oury) == 1:
         #    return 0 
@@ -121,14 +120,14 @@ def check_move(ourx, oury, data):
     #        if bod_seg.get('x') == ourx and bod_seg.get('y') == oury:
     #            return 0
     for s in data['snakes']['data']:
-        if s['id'] != data['you']['id']:
-            s_x = s['body']['data'][0].get('x')
-            s_y = s['body']['data'][0].get('y')
-            if abs((ourx - s_x)) + abs((oury - s_y)) == 1:  #WTF doesn't this work when == 1?
+        #if s['id'] != data['you']['id']:
+        s_x = s['body']['data'][0].get('x')
+        s_y = s['body']['data'][0].get('y')
+        if abs((ourx - s_x)) + abs((oury - s_y)) == 2:  #WTF doesn't this work when == 1?
+            return 0
+        for sb in s['body']['data']:
+            if sb['x'] == ourx and sb['y'] == oury:
                 return 0
-            for sb in s['body']['data']:
-                if sb['x'] == ourx and sb['y'] == oury:
-                    return 0
     return 1
     
 # Expose WSGI app (so gunicorn can find it)
