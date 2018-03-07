@@ -30,7 +30,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'color': '#50FC5B',
+        'color': '#30005B',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url
     }
@@ -42,6 +42,8 @@ def move():
 
     tail = data['you']['body']['data'][-1]
     head = data['you']['body']['data'][0]
+    
+    last_snake = False;
 
     # TODO: Do things with data
     
@@ -52,25 +54,30 @@ def move():
     c_tot_diff = hc_x_diff + hc_y_diff
     
     hx = head['x']
-    hy = head['y']
+    hy = head['y']      #coords of your head and tail
     tx = tail['x']
     ty = tail['y']
     
-    ht_x_diff = hx - tx
+    ht_x_diff = hx - tx     #differences between you head coords and tail coords
     ht_y_diff = hy - ty
     
-    if data.get('you').get('health') < 61 or (len(data.get('snakes').get('data')) == 2 and data['snakes']['data'][0]['length'] >= data['you']['length']):
+    if len(data.get('snakes').get('data')) == 2:        #sets last_snake to the last snake other than you when there are only 2 left
+        for rival in [snek for snek in data['snakes']['data'] if snek['id'] != data['you']['id']]:      
+            last_snake = rival
+    
+    #go for food if hunger <61 or it is 1v1 and the rival is longer or has equal length to you
+    if data.get('you').get('health') < 61 or (rival and rival['length'] >= data['you']['length']):
         for crumb in data.get('food').get('data'):
             xtemp = hx - crumb.get('x')
             ytemp = hy - crumb.get('y')
-            temp_tot = abs(xtemp) + abs(ytemp)
+            temp_tot = abs(xtemp) + abs(ytemp)      #calculating closest crumb
             if temp_tot <= c_tot_diff:
                 hc_x_diff = xtemp
                 hc_y_diff = ytemp
                 c_tot_diff = temp_tot
-        direction = set_direction(hc_x_diff, hc_y_diff, hx, hy, data)
+        direction = set_direction(hc_x_diff, hc_y_diff, hx, hy, data)   #set direction to closest crumb
     else:
-        direction = set_direction(ht_x_diff, ht_y_diff, hx, hy, data)
+        direction = set_direction(ht_x_diff, ht_y_diff, hx, hy, data)   #otherwise set direction to tail
       
     print direction
     return {
@@ -81,7 +88,7 @@ def set_direction(x_diff, y_diff, hx, hy, data):
     if x_diff > 0 and check_move(hx - 1, hy, data):
             return 'left'
     elif x_diff < 0 and check_move(hx + 1, hy, data):
-            return 'right'
+            return 'right'                                  #goes the direction based on the difference between head coords and destination coords
     elif y_diff > 0 and check_move(hx, hy - 1, data):
             return 'up'
     elif y_diff < 0 and check_move(hx, hy + 1, data):
@@ -90,7 +97,7 @@ def set_direction(x_diff, y_diff, hx, hy, data):
         if check_move(hx - 1, hy, data):
             return 'left'
         if check_move(hx + 1, hy, data):
-            return 'right'
+            return 'right'                          
         if check_move(hx, hy - 1, data):
             return 'up'
         if check_move(hx, hy + 1, data):
@@ -104,10 +111,13 @@ def check_move(ourx, oury, data):
     
     board_width = data.get('width')
     board_height = data.get('height')
+    #check if our proposed direction is out of bounds  - this is to avoid walls
     if ourx >= board_width or ourx < 0 or oury >= board_height or oury < 0:
         return 0
     #if ourx == ourbody[1].get('x') and oury ==  ourbody[1].get('y'):
     #    return 0
+    
+    #check if our proposed direction is where any of our body segments except the tail are
     for seg in data['you']['body']['data'][:-1]:
         if seg['x'] == ourx and seg['y'] == oury:
             return 0
@@ -119,12 +129,15 @@ def check_move(ourx, oury, data):
     #    for bod_seg in snek.get('body').get('data'):
     #        if bod_seg.get('x') == ourx and bod_seg.get('y') == oury:
     #            return 0
+    
+    #checks proposed direction for body segments of any other snake, and if their head can move into our destination
     for s in [snek for snek in data['snakes']['data'] if snek['id'] != data['you']['id']]:
-        #if s['id'] != data['you']['id']:
         s_x = s['body']['data'][0].get('x')
         s_y = s['body']['data'][0].get('y')
-        if abs((ourx - s_x)) + abs((oury - s_y)) == 1:  #WTF doesn't this work when == 1?
+        #checking if an opponent's head can move into our destination this turn, only if they are longer than us
+        if abs((ourx - s_x)) + abs((oury - s_y)) == 1 and s['length'] >= data['you']['length']:  #WTF doesn't this work when == 1?
             return 0
+        #checking for opponent snake body segments
         for sb in s['body']['data']:
             if sb['x'] == ourx and sb['y'] == oury:
                 return 0
