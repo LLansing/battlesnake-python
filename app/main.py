@@ -61,12 +61,12 @@ def move():
     ht_x_diff = hx - tx     #differences between you head coords and tail coords
     ht_y_diff = hy - ty
     
-    if len(data.get('snakes').get('data')) == 2:        #sets last_snake to the last snake other than you when there are only 2 left
-        for rival in [snek for snek in data['snakes']['data'] if snek['id'] != data['you']['id']]:      
-            last_snake = rival
+    #if len(data.get('snakes').get('data')) == 2:        #sets last_snake to the last snake other than you when there are only 2 left
+    #    for rival in [snek for snek in data['snakes']['data'] if snek['id'] != data['you']['id']]:      
+    #        last_snake = rival
     
     #go for food if hunger <61 or it is 1v1 and the rival is longer or has equal length to you
-    if data.get('you').get('health') < 61 or (rival and rival['length'] >= data['you']['length']):
+    if data.get('you').get('health') < 61: # or (rival and rival['length'] >= data['you']['length']):
         for crumb in data.get('food').get('data'):
             xtemp = hx - crumb.get('x')
             ytemp = hy - crumb.get('y')
